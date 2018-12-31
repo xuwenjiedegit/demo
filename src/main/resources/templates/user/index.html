@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="../static/scripts/test.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/easyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/easyui/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/demo/demo.css">
+    <script type="text/javascript" src="../static/jquery.easyui.min.js"></script>
+    <title>心脑血管预测</title>
+</head>
+<body>
+<h2>心脑血管疾病预测</h2>
+<p>本测试通过权威专家认证，通过12万人数据校准，只需填写11项简单快速，快来测试一下你未来十年有没有可能患病吧！！</p>
+<div style="margin:20px 0;"></div>
+<div class="easyui-panel" title="问卷测试" style="width:400px;padding:30px 60px">
+    <form action="/user/show1" method=post name=fm target="fraSubmit">
+        <div>
+            <div style="margin-bottom:20px">
+                <div>性别:</div>
+                <td style="text-align:left">
+            <span class="radioSpan" id="sex1" name="sex1" onblur="quchu()">
+                 <input type="radio" id="1" name="sex1" value="1" checked="checked">男</input>
+                <input type="radio"  id="0" name="sex1" value="0">女</input>
+
+            </span>
+            </div>
+            <div style="margin-bottom:20px">
+                <div>年龄（周岁）:</div>
+                <input class="easyui-validatebox" missingMessage="请填写年龄" data-options="required:true,validType:'length[1,2]'"  onblur="yizou()" style="width:100%;height:32px" id="age" name="age"  >
+                <a id="agess" name="agess" colour style="color: red;display:none"></a>
+            </div>
+            <div style="margin-bottom:20px">
+                <div>当前收缩压值（单位mmHg）:</div>
+                <input class="easyui-validatebox" missingMessage="请填写当前收缩压" data-options="required:true,validType:'length[1,3]'"  onblur="dangqiande()" style="width:100%;height:32px" id="dangqian" name="dangqian" >
+                <a id="dangqianss" name="dangqianss" colour style="color: red;display:none"></a>
+            </div>
+            <!--<div style="margin-bottom:20px">-->
+                <!--<div>治疗后收缩压值（单位mmHg）:</div>-->
+                <!--<input class="easyui-validatebox" missingMessage="请填写当前收缩压" data-options="required:true,validType:'length[1,3]'"  onblur="zhiliaoyihou()" style="width:100%;height:32px" id="zhiliaohou" name="zhiliaohou" >-->
+                <!--<a id="zhiliaohouss" name="zhiliaohouss" colour style="color: red;display:none"></a>-->
+            <!--</div>-->
+         <!--   <div style="margin-bottom:20px">
+                <div>未治疗的收缩压值（单位mmHg）:</div>
+                <input class="easyui-validatebox"  missingMessage="请填写治疗前收缩压" data-options="required:true,validType:'length[1,3]'"  onblur="zhiliaoqian()" style="width:100%;height:32px" id="weizhiliao" name="weizhiliao" >
+                <a id="weizhiliaoss" name="weizhiliaoss" colour style="color: red;display:none"></a>
+            </div>-->
+            <div style="margin-bottom:20px">
+                <div>总胆固醇（单位mg/ml):</div>
+                <input class="easyui-validatebox"  missingMessage="请填写总胆固醇" data-options="required:true"  onblur="zongdanguchun()" style="width:100%;height:32px" id="danguchun" name="danguchun">
+                <a id="danguchunss" name="danguchunss" colour style="color: red;display:none"></a>
+            </div>
+            <div style="margin-bottom:20px">
+                <div>HDL（单位mg/ml):</div>
+                <input class="easyui-validatebox"  missingMessage="请填写HDL" data-options="required:true,validType:'length[1,3]'"  onblur="zonghdl()" style="width:100%;height:32px" id="hdl" name="hdl">
+                <a id="hdlss" name="hdlss" colour style="color: red;display:none"></a>
+            </div>
+            <div style="margin-bottom:20px">
+                <div>腰围（单位 cm):</div>
+                <input class="easyui-validatebox"  missingMessage="请填写腰围" data-options="required:true,validType:'length[1,3]'"  onblur="zongyaowei()" style="width:100%;height:32px" id="yaowei" name="yaowei">
+                <a id="yaoweiss" name="yaoweiss" colour style="color: red;display:none"></a>
+            </div>
+            <div style="margin-bottom:20px">
+                <div>是否服用降压药:</div>
+                <!--  <input class="easyui-textbox" style="width:100%;height:32px">-->
+                <td style="text-align:left" id="fuyong1" name="fuyong1">
+            <span class="radioSpan">
+                <input type="radio" name="fuyong1" value="0" checked="checked">否</input>
+                <input type="radio" name="fuyong1" value="1">是</input>
+            </span>
+            </div>
+            <div style="margin-bottom:20px">
+                <div>是否吸烟:</div>
+                <!--  <input class="easyui-textbox" style="width:100%;height:32px">-->
+                <td style="text-align:left" id="xiyan1" name="xiyan1">
+            <span class="radioSpan">
+                <input type="radio" name="xiyanFlag" value="0">否</input>
+                <input type="radio" name="xiyanFlag" value="1">是</input>
+            </span>
+            </div>
+            <div style="margin-bottom:20px">
+                <div>是否患有糖尿病:</div>
+                <td style="text-align:left" id="tangniaobing1" name="tangniaobing1">
+            <span class="radioSpan">
+                <input type="radio" name="tangFlag" value="0">否</input>
+                <input type="radio" name="tangFlag" value="1">是</input>
+            </span>
+            </div>
+            <div style="margin-bottom:20px">
+                <div>生活区域:</div>
+                <td style="text-align:left" id="quyu1" name="quyu1">
+            <span class="radioSpan">
+                <input type="radio" name="quyuFlag" value="0">南方</input>
+                <input type="radio" name="quyuFlag" value="1">北方</input>
+            </span>
+            </div>
+            <div style="margin-bottom:20px" id="huanjin2" name="huanji2">
+                <div>生活环境:</div>
+                <td style="text-align:left" id="huanjin1" name="huanji1">
+            <span class="radioSpan">
+                <input type="radio" name="huanjinFlag" value="0">城市</input>
+                <input type="radio" name="huanjinFlag" value="1">乡村</input>
+            </span>
+            </div>
+            <div style="margin-bottom:20px" id="jiazu2" name="jiazu2">
+                <div>是否有心血管病家族史:</div>
+                <td style="text-align:left">
+            <span class="radioSpan" id="jiazu1" name="jiazu1">
+                <input type="radio" name="jiazuFlag" value="0">否</input>
+                <input type="radio" name="jiazuFlag" value="1">是</input>
+            </span>
+            </div>
+            <input type="hidden"  name="xiyan"/>
+            <input type="hidden"  name="tangniaobing"/>
+            <input type="hidden"  name="quyu"/>
+            <input type="hidden"  name="huanjin"/>
+            <input type="hidden"  name="jiazu"/>
+            <input  type="hidden"  name="sex"/>
+            <input  type="hidden"  name="zhiliaohou"/>
+            <input  type="hidden"  name="weizhiliao"/>
+            <div>
+                <a  class="easyui-linkbutton" iconCls="icon-ok" style="width:100%;height:32px" onclick="sub();">提交</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
