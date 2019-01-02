@@ -59,25 +59,7 @@ function yizou(){
      })
  }
 
-// function zhiliaoyihou(){
-//     var age = $("#zhiliaohou").val();
-//     $.ajax({
-//         "url":"/user/panduanzhiliaohou",
-//         "data":{"age":age},
-//         "type":"post",
-//         "datatype":"josn",
-//         "success":function (obj) {
-//             if(obj=="ok"){
-//                 $("#zhiliaohouss").html("");
-//                 document.getElementById("zhiliaohouss").style.display="none";
-//             }else
-//             {
-//                 document.getElementById("zhiliaohouss").style.display="";
-//                 $("#zhiliaohouss").html("输入格式不正确");
-//             }
-//         }
-//     })
-// }
+
 
 
 function dangqiande() {
